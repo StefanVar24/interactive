@@ -21,6 +21,11 @@ internal class HttpRootSyntaxNode : HttpSyntaxNode
         AddInternal(requestNode);
     }
 
+    public void Add(HttpCommentNode commentNode)
+    {
+        AddInternal(commentNode);
+    } 
+
     public void Add(HttpVariableDeclarationAndAssignmentNode variableNode)
     {
         AddInternal(variableNode);
@@ -59,7 +64,7 @@ internal class HttpRootSyntaxNode : HttpSyntaxNode
                         }
                         else
                         {
-                            return node.CreateBindingFailure(new HttpDiagnosticInfo("1", "invalid variable", CodeAnalysis.DiagnosticSeverity.Error));
+                            return DynamicExpressionUtilites.ResolveExpressionBinding(node, node.Text);
                         }
 
                     });

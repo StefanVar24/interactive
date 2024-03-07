@@ -77,6 +77,11 @@ internal class HttpRequestParser
                 }
             }
 
+            foreach (var comment in commentsToPrepend)
+            {
+                _syntaxTree.RootNode.Add(comment);
+            }
+
             return _syntaxTree;
         }
 
@@ -126,7 +131,7 @@ internal class HttpRequestParser
             {
                 if (node is null)
                 {
-                    if (CurrentToken is { Kind: HttpTokenKind.Word })
+                    if (CurrentToken is ({ Kind: HttpTokenKind.Word }) or ({ Kind: HttpTokenKind.Punctuation} and { Text: "/"}))
                     {
                         node = new HttpVariableValueNode(_sourceText, _syntaxTree);
 
@@ -294,7 +299,7 @@ internal class HttpRequestParser
 
         private HttpRequestNode? ParseRequest()
         {
-            if (IsComment())
+            if (!MoreTokens() || IsComment())
             {
                 return null;
             }
