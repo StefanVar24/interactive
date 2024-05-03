@@ -842,7 +842,7 @@
     "node-fetch": "2.6.7",
     "rxjs": "7.5.6",
     "uuid": "8.3.2",
-    "vscode-oniguruma": "1.6.1",
+    "vscode-oniguruma": "1.7.0",
     "vscode-textmate": "6.0.0",
     "vscode-uri": "3.0.6",
     "@vscode/l10n": "0.0.10"
